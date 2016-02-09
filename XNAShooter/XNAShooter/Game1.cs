@@ -29,6 +29,8 @@ namespace XNAShooter
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            graphics.PreferredBackBufferHeight = 480;
+            graphics.PreferredBackBufferWidth = 640;
             }
 
         /// <summary>
@@ -73,7 +75,7 @@ namespace XNAShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
             {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Azure);
 
             // TODO: Add your drawing code here
 
