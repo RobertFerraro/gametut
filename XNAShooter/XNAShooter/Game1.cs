@@ -1,6 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace XNAShooter
     {
@@ -12,10 +17,18 @@ namespace XNAShooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //Number that holds the player score
+        int score=99;
+        // The font used to display UI elements
+        SpriteFont font;
+
         public Game1()
             {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1280;
             }
 
         /// <summary>
@@ -29,8 +42,7 @@ namespace XNAShooter
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            graphics.PreferredBackBufferHeight = 480;
-            graphics.PreferredBackBufferWidth = 640;
+
             }
 
         /// <summary>
@@ -41,6 +53,9 @@ namespace XNAShooter
             {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // Load the score font
+            font = Content.Load<SpriteFont>("gameFont");
 
             // TODO: use this.Content to load your game content here
             }
@@ -75,9 +90,18 @@ namespace XNAShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
             {
-            GraphicsDevice.Clear(Color.Azure);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            // Start drawing
+            spriteBatch.Begin();
+
+            // Draw the score
+            spriteBatch.DrawString(font, "score: " + score, new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y), Color.White);
+            // Draw the player health
+//            spriteBatch.DrawString(font, "health: " + player.Health, new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y + 30), Color.White);
+
+            //Stop drawing
+            spriteBatch.End();
 
             base.Draw(gameTime);
             }
